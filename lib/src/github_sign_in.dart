@@ -37,6 +37,7 @@ class GitHubSignIn {
               url: _generateAuthorizedUrl(),
               redirectUrl: redirectUrl,
               userAgent: userAgent,
+              clearCache: clearCache,
             )));
     if (code == null || code.isEmpty) {
       return GitHubSignInResult(GitHubSignInResultStatus.cancelled,

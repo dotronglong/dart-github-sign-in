@@ -1,3 +1,7 @@
+## [0.0.3] - v0.0.3
+
+* Improve error handling
+
 ## [0.0.2] - v0.0.2
 
 * Allow to cache session

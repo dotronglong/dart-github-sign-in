@@ -32,19 +32,23 @@ class GitHubSignIn {
 
   Future<GitHubSignInResult> signIn(BuildContext context) async {
     // let's authorize
-    String code = await Navigator.of(context).push(MaterialPageRoute(
+    var authorizedResult = await Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => GitHubSignInPage(
               url: _generateAuthorizedUrl(),
               redirectUrl: redirectUrl,
               userAgent: userAgent,
               clearCache: clearCache,
             )));
-    if (code == null || code.isEmpty) {
+    if (authorizedResult == null) {
       return GitHubSignInResult(GitHubSignInResultStatus.cancelled,
           errorMessage: "Sign In attempt has been cancelled.");
+    } else if (authorizedResult is Exception) {
+      return GitHubSignInResult(GitHubSignInResultStatus.failed,
+          errorMessage: authorizedResult.toString());
     }
 
     // exchange for access token
+    String code = authorizedResult;
     var response = await http.post("$_githubAccessTokenUrl", headers: {
       "Accept": "application/json"
     }, body: {

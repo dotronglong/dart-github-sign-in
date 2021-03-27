@@ -49,7 +49,7 @@ class GitHubSignIn {
 
     // exchange for access token
     String code = authorizedResult;
-    var response = await http.post("$_githubAccessTokenUrl", headers: {
+    var response = await http.post(Uri.parse(_githubAccessTokenUrl), headers: {
       "Accept": "application/json"
     }, body: {
       "client_id": clientId,

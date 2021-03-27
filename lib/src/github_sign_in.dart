@@ -21,50 +21,64 @@ class GitHubSignIn {
   final String _githubAccessTokenUrl =
       "https://github.com/login/oauth/access_token";
 
-  GitHubSignIn(
-      {@required this.clientId,
-      @required this.clientSecret,
-      @required this.redirectUrl,
-      this.scope = "user,gist,user:email",
-      this.allowSignUp = true,
-      this.clearCache = true,
-      this.userAgent});
+  GitHubSignIn({
+    @required this.clientId,
+    @required this.clientSecret,
+    @required this.redirectUrl,
+    this.scope = "user,gist,user:email",
+    this.allowSignUp = true,
+    this.clearCache = true,
+    this.userAgent,
+  });
 
   Future<GitHubSignInResult> signIn(BuildContext context) async {
     // let's authorize
-    var authorizedResult = await Navigator.of(context).push(MaterialPageRoute(
+    var authorizedResult = await Navigator.of(context).push(
+      MaterialPageRoute(
         builder: (context) => GitHubSignInPage(
-              url: _generateAuthorizedUrl(),
-              redirectUrl: redirectUrl,
-              userAgent: userAgent,
-              clearCache: clearCache,
-            )));
+          url: _generateAuthorizedUrl(),
+          redirectUrl: redirectUrl,
+          userAgent: userAgent,
+          clearCache: clearCache,
+        ),
+      ),
+    );
     if (authorizedResult == null) {
-      return GitHubSignInResult(GitHubSignInResultStatus.cancelled,
-          errorMessage: "Sign In attempt has been cancelled.");
+      return GitHubSignInResult(
+        GitHubSignInResultStatus.cancelled,
+        errorMessage: "Sign In attempt has been cancelled.",
+      );
     } else if (authorizedResult is Exception) {
-      return GitHubSignInResult(GitHubSignInResultStatus.failed,
-          errorMessage: authorizedResult.toString());
+      return GitHubSignInResult(
+        GitHubSignInResultStatus.failed,
+        errorMessage: authorizedResult.toString(),
+      );
     }
 
     // exchange for access token
     String code = authorizedResult;
-    var response = await http.post(Uri.parse(_githubAccessTokenUrl), headers: {
-      "Accept": "application/json"
-    }, body: {
-      "client_id": clientId,
-      "client_secret": clientSecret,
-      "code": code
-    });
+    var response = await http.post(
+      Uri.parse(_githubAccessTokenUrl),
+      headers: {"Accept": "application/json"},
+      body: {
+        "client_id": clientId,
+        "client_secret": clientSecret,
+        "code": code
+      },
+    );
     GitHubSignInResult result;
     if (response.statusCode == 200) {
       var body = json.decode(utf8.decode(response.bodyBytes));
-      result = GitHubSignInResult(GitHubSignInResultStatus.ok,
-          token: body["access_token"]);
+      result = GitHubSignInResult(
+        GitHubSignInResultStatus.ok,
+        token: body["access_token"],
+      );
     } else {
-      result = GitHubSignInResult(GitHubSignInResultStatus.cancelled,
-          errorMessage:
-              "Unable to obtain token. Received: ${response.statusCode}");
+      result = GitHubSignInResult(
+        GitHubSignInResultStatus.cancelled,
+        errorMessage:
+            "Unable to obtain token. Received: ${response.statusCode}",
+      );
     }
 
     return result;

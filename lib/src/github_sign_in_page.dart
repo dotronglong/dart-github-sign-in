@@ -30,13 +30,15 @@ class _GitHubSignInPageState extends State<GitHubSignInPage> {
   @override
   void initState() {
     super.initState();
+
     _wv.onUrlChanged.listen((url) {
       if (url.startsWith(widget.redirectUrl)) {
         Navigator.of(context)
             .pop(url.replaceFirst("${widget.redirectUrl}?code=", "").trim());
       } else if (url.contains("error=")) {
-        Navigator.of(context)
-            .pop(Exception(Uri.parse(url).queryParameters["error"]));
+        Navigator.of(context).pop(
+          Exception(Uri.parse(url).queryParameters["error"]),
+        );
       }
     });
   }

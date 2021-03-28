@@ -3,7 +3,11 @@ class GitHubSignInResult {
   final GitHubSignInResultStatus status;
   final String errorMessage;
 
-  GitHubSignInResult(this.status, {this.token, this.errorMessage = ""});
+  GitHubSignInResult(
+    this.status, {
+    this.token,
+    this.errorMessage = "",
+  });
 }
 
 enum GitHubSignInResultStatus {

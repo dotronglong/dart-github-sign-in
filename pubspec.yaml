@@ -1,13 +1,14 @@
 name: github_sign_in
 description: Sign In With GitHub
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/dotronglong/dart-github-sign-in
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.1
-  flutter_webview_plugin: ^0.3.11
+  # flutter_webview_plugin: ^0.3.11
+  webview_flutter:  ^2.0.2

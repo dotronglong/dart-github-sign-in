@@ -14,7 +14,7 @@ class GitHubSignIn {
   final String scope;
   final bool allowSignUp;
   final bool clearCache;
-  final String userAgent;
+  final String? userAgent;
 
   final String _githubAuthorizedUrl =
       "https://github.com/login/oauth/authorize";
@@ -22,9 +22,9 @@ class GitHubSignIn {
       "https://github.com/login/oauth/access_token";
 
   GitHubSignIn({
-    @required this.clientId,
-    @required this.clientSecret,
-    @required this.redirectUrl,
+    required this.clientId,
+    required this.clientSecret,
+    required this.redirectUrl,
     this.scope = "user,gist,user:email",
     this.allowSignUp = true,
     this.clearCache = true,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:url_launcher/url_launcher.dart';
 
 class GitHubSignInPage extends StatefulWidget {
   final String url;
@@ -22,37 +24,41 @@ class GitHubSignInPage extends StatefulWidget {
 }
 
 class _GitHubSignInPageState extends State<GitHubSignInPage> {
-  final WebView _wv = WebView();
-
   static const String _userAgentMacOSX =
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36";
 
   @override
   void initState() {
     super.initState();
+    if (kIsWeb) {
+      _launchURL();
+    }
   }
+
+  void _launchURL() async => await canLaunch(widget.url)
+      ? await launch(widget.url)
+      : throw 'Could not launch $widget.url';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: Text(widget.title),
-      ),
-      body: WebView(
-        initialUrl: widget.url,
-        userAgent: widget.userAgent ?? _userAgentMacOSX,
-        onPageFinished: (url) {
-          if (url.startsWith(widget.redirectUrl)) {
-            Navigator.of(context).pop(
-                url.replaceFirst("${widget.redirectUrl}?code=", "").trim());
-          } else if (url.contains("error=")) {
-            Navigator.of(context).pop(
-              Exception(Uri.parse(url).queryParameters["error"]),
-            );
-          }
-        },
-      ),
-    );
+        appBar: new AppBar(
+          title: Text(widget.title),
+        ),
+        body: WebView(
+          initialUrl: widget.url,
+          userAgent: widget.userAgent ?? _userAgentMacOSX,
+          onPageFinished: (url) {
+            if (url.startsWith(widget.redirectUrl)) {
+              Navigator.of(context).pop(
+                  url.replaceFirst("${widget.redirectUrl}?code=", "").trim());
+            } else if (url.contains("error=")) {
+              Navigator.of(context).pop(
+                Exception(Uri.parse(url).queryParameters["error"]),
+              );
+            }
+          },
+        ));
   }
 
   @override

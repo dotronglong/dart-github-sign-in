@@ -30,14 +30,14 @@ class _GitHubSignInPageState extends State<GitHubSignInPage> {
   @override
   void initState() {
     super.initState();
-    if (kIsWeb) {
-      _launchURL();
-    }
+    // if (kIsWeb) {
+    //   _launchURL();
+    // }
   }
 
-  void _launchURL() async => await canLaunch(widget.url)
-      ? await launch(widget.url)
-      : throw 'Could not launch $widget.url';
+  // void _launchURL() async => await canLaunch(widget.url)
+  //     ? await launch(widget.url)
+  //     : throw 'Could not launch $widget.url';
 
   @override
   Widget build(BuildContext context) {

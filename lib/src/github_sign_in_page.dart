@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:url_launcher/url_launcher.dart';
 
 class GitHubSignInPage extends StatefulWidget {
   final String url;
@@ -30,14 +28,7 @@ class _GitHubSignInPageState extends State<GitHubSignInPage> {
   @override
   void initState() {
     super.initState();
-    // if (kIsWeb) {
-    //   _launchURL();
-    // }
   }
-
-  // void _launchURL() async => await canLaunch(widget.url)
-  //     ? await launch(widget.url)
-  //     : throw 'Could not launch $widget.url';
 
   @override
   Widget build(BuildContext context) {

@@ -38,9 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final GitHubSignIn gitHubSignIn = GitHubSignIn(
-      clientId: '123456788',
-      clientSecret: '12345778',
-      redirectUrl: 'https://someurl');
+      clientId: 'abd975f97f953c6e1843',
+      clientSecret: '709fb6441354c8d148248ae2cab0673b4ce7f1d5',
+      redirectUrl: 'https://l2t-flutter.firebaseapp.com/__/auth/handler');
 
   void _gitHubSignIn(BuildContext context) async {
     _incrementCounter();

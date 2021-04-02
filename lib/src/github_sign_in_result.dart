@@ -1,5 +1,5 @@
 class GitHubSignInResult {
-  final String token;
+  final String? token;
   final GitHubSignInResultStatus status;
   final String errorMessage;
 

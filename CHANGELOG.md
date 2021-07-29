@@ -1,3 +1,7 @@
+## [0.0.5-dev.1] - v0.0.5-dev.1
+
+* Add null safety
+
 ## [0.0.4] - v0.0.4
 
 * Update dependencies

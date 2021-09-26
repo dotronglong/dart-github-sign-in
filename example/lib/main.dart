@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter GitHub Demo'),
     );
   }
 }
@@ -29,22 +29,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   final GitHubSignIn gitHubSignIn = GitHubSignIn(
       clientId: 'abd975f97f953c6e1843',
       clientSecret: '709fb6441354c8d148248ae2cab0673b4ce7f1d5',
-      redirectUrl: 'https://l2t-flutter.firebaseapp.com/__/auth/handler');
+      redirectUrl: 'https://l2t-flutter.firebaseapp.com/__/auth/handler',
+      title: 'GitHub Connection'
+  );
 
   void _gitHubSignIn(BuildContext context) async {
-    _incrementCounter();
-
     var result = await gitHubSignIn.signIn(context);
     switch (result.status) {
       case GitHubSignInResultStatus.ok:
@@ -65,25 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: ElevatedButton(
+          onPressed: () {
+            _gitHubSignIn(context);
+          },
+          child: Text("GitHub Connection"),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _gitHubSignIn(context);
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }

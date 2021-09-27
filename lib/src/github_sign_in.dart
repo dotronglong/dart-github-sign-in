@@ -16,6 +16,7 @@ class GitHubSignIn {
   final String redirectUrl;
   final String scope;
   final String title;
+  final bool? centerTitle;
   final bool allowSignUp;
   final bool clearCache;
   final String? userAgent;
@@ -31,6 +32,7 @@ class GitHubSignIn {
     required this.redirectUrl,
     this.scope = "user,gist,user:email",
     this.title = "",
+    this.centerTitle,
     this.allowSignUp = true,
     this.clearCache = true,
     this.userAgent,
@@ -56,6 +58,7 @@ class GitHubSignIn {
             userAgent: userAgent,
             clearCache: clearCache,
             title: title,
+            centerTitle: centerTitle,
           ),
         ),
       );

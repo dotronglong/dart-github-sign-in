@@ -6,6 +6,7 @@ class GitHubSignInPage extends StatefulWidget {
   final String redirectUrl;
   final bool clearCache;
   final String title;
+  final bool? centerTitle;
   final String? userAgent;
 
   const GitHubSignInPage(
@@ -14,7 +15,8 @@ class GitHubSignInPage extends StatefulWidget {
       required this.redirectUrl,
       this.userAgent,
       this.clearCache = true,
-      this.title = ""})
+      this.title = "",
+      this.centerTitle})
       : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class _GitHubSignInPageState extends State<GitHubSignInPage> {
     return Scaffold(
         appBar: new AppBar(
           title: Text(widget.title),
-          centerTitle: true,
+          centerTitle: widget.centerTitle,
         ),
         body: WebView(
           initialUrl: widget.url,

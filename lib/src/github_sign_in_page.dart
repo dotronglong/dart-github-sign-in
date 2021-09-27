@@ -43,6 +43,13 @@ class _GitHubSignInPageState extends State<GitHubSignInPage> {
           initialUrl: widget.url,
           userAgent: widget.userAgent ?? _userAgentMacOSX,
           javascriptMode: JavascriptMode.unrestricted,
+          onWebViewCreated: (WebViewController controller) {
+            if (widget.clearCache) {
+              controller.clearCache();
+              CookieManager manager = CookieManager();
+              manager.clearCookies();
+            }
+          },
           onPageFinished: (url) {
             if (url.contains("error=")) {
               Navigator.of(context).pop(

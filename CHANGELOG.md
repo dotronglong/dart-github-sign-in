@@ -1,3 +1,7 @@
+## [0.0.5-dev.3] - v0.0.5-dev.3
+
+* Fix possibility to clear cache
+
 ## [0.0.5-dev.2] - v0.0.5-dev.2
 
 * Fix cancel button

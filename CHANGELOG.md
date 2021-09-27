@@ -1,3 +1,7 @@
+## [0.0.5-dev.2] - v0.0.5-dev.2
+
+* Fix cancel button
+
 ## [0.0.5-dev.1] - v0.0.5-dev.1
 
 * Add null safety

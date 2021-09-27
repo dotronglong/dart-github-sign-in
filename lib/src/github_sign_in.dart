@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:url_launcher/url_launcher.dart';
 
 import 'github_sign_in_page.dart';
 import 'github_sign_in_result.dart';
@@ -16,6 +15,8 @@ class GitHubSignIn {
   final String clientSecret;
   final String redirectUrl;
   final String scope;
+  final String title;
+  final bool? centerTitle;
   final bool allowSignUp;
   final bool clearCache;
   final String? userAgent;
@@ -30,15 +31,12 @@ class GitHubSignIn {
     required this.clientSecret,
     required this.redirectUrl,
     this.scope = "user,gist,user:email",
+    this.title = "",
+    this.centerTitle,
     this.allowSignUp = true,
     this.clearCache = true,
     this.userAgent,
   });
-
-  void _launchURL(BuildContext context) async => await launch(
-        _generateAuthorizedUrl(),
-        webOnlyWindowName: '_self',
-      );
 
   Future<GitHubSignInResult> signIn(BuildContext context) async {
     // let's authorize
@@ -59,12 +57,14 @@ class GitHubSignIn {
             redirectUrl: redirectUrl,
             userAgent: userAgent,
             clearCache: clearCache,
+            title: title,
+            centerTitle: centerTitle,
           ),
         ),
       );
     }
 
-    if (authorizedResult == null) {
+    if (authorizedResult == null || authorizedResult.toString().contains('access_denied')) {
       return GitHubSignInResult(
         GitHubSignInResultStatus.cancelled,
         errorMessage: "Sign In attempt has been cancelled.",

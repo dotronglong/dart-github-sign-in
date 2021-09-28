@@ -1,6 +1,6 @@
 name: github_sign_in
 description: Sign In With GitHub
-version: 0.0.5-dev.2
+version: 0.0.5-dev.3
 homepage: https://github.com/dotronglong/dart-github-sign-in
 
 environment:

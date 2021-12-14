@@ -1,3 +1,7 @@
+## [0.0.5-dev.4] - v0.0.5-dev.4
+
+* Update dependencies including webview_flutter to 3.0.0
+
 ## [0.0.5-dev.3] - v0.0.5-dev.3
 
 * Fix possibility to clear cache

@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
       clientSecret: '709fb6441354c8d148248ae2cab0673b4ce7f1d5',
       redirectUrl: 'https://l2t-flutter.firebaseapp.com/__/auth/handler',
       title: 'GitHub Connection',
-      centerTitle: false
+      centerTitle: false,
   );
 
   void _gitHubSignIn(BuildContext context) async {
